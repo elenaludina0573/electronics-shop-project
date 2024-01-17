@@ -1,5 +1,6 @@
 import csv
-import os.path
+
+
 
 
 class Item:
@@ -51,16 +52,15 @@ class Item:
             print(f'Длинное слово - {value[:10]}')
 
     @classmethod
-    def instantiate_from_csv(cls, file_path):
-        file_path = os.path.abspath(__file__)
+    def instantiate_from_csv(cls, data='src/items.csv'):
         cls.all.clear()
-        with open(file_path, 'r', newline='\n', encoding='windows-1251') as f:
+        with open('src/items.csv', 'r', newline='\n', encoding='UTF-8') as f:
             reader = csv.DictReader(f)
             items = list(reader)
             for item in items:
-                print (cls(name=item.get('name'),
-                            price=item.get('price'),
-                            quantity=item.get('quantity')))
+                print(cls(name=item.get('name'),
+                          price=item.get('price'),
+                          quantity=item.get('quantity')))
 
     @staticmethod
     def string_to_number(name):
