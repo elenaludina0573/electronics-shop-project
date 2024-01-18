@@ -36,10 +36,10 @@ def test_name_setter_truncate():
 
 def test_instantiate_from_csv():
     Item.instantiate_from_csv('src/items.csv')  # создание объектов из данных файла
-    assert len(Item.all) == 55  # в файле 5 записей с данными по товарам
+    assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
     item1 = Item.all[0]
-    assert item1.name == None
+    assert item1.name == 'Смартфон'
 
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
