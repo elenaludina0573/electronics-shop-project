@@ -1,6 +1,5 @@
 import csv
-
-
+import os
 
 
 class Item:
@@ -37,6 +36,11 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
+        """
+        Проверяет, что длина наименования товара не больше 10 симвовов. 
+        В противном случае, 
+        обрезать строку (оставить первые 10 символов)
+        """
 
     @property
     def name(self):
@@ -52,15 +56,19 @@ class Item:
             print(f'Длинное слово - {value[:10]}')
 
     @classmethod
-    def instantiate_from_csv(cls, data='src/items.csv'):
+    def instantiate_from_csv(cls, path):
         cls.all.clear()
-        with open('src/items.csv', 'r', newline='\n', encoding='UTF-8') as f:
+        path = os.path.join(os.path.dirname(__file__), 'items.csv')
+        with open(path, 'r', newline='\n', encoding='UTF-8') as f:
             reader = csv.DictReader(f)
             items = list(reader)
             for item in items:
                 print(cls(name=item.get('name'),
                           price=item.get('price'),
                           quantity=item.get('quantity')))
+        """
+        Статический метод, возвращающий число из числа-строки
+        """
 
     @staticmethod
     def string_to_number(name):
