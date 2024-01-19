@@ -24,15 +24,18 @@ def test_apply_discount(inst):
     inst.apply_discount()
     assert inst.price == 5100
 
+
 def test_name_setter():
     item = Item('Телефон', 10000, 5)
     item.name = 'Смартфон'
     assert item.name == 'Смартфон'
 
+
 def test_name_setter_truncate():
     item = Item('Телефон', 25000, 3)
     item.name = 'Суперсмартфон'
     assert item.name == 'Суперсмарт'
+
 
 def test_instantiate_from_csv():
     Item.instantiate_from_csv('src/items.csv')  # создание объектов из данных файла
@@ -41,7 +44,21 @@ def test_instantiate_from_csv():
     item1 = Item.all[0]
     assert item1.name == 'Смартфон'
 
+
 def test_string_to_number():
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('5.0') == 5
     assert Item.string_to_number('5.5') == 5
+
+
+def test_repr_():
+    item1 = Item("Смартфон", 10000, 20)
+    assert repr(item1) == "Item('Смартфон', 10000, 20)"
+
+def test_str():
+    item1 = Item("Смартфон", 10000, 20)
+    assert str(item1) == 'Смартфон'
+
+
+
+
