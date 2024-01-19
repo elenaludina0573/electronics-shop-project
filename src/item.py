@@ -36,11 +36,6 @@ class Item:
         Применяет установленную скидку для конкретного товара.
         """
         self.price = self.price * self.pay_rate
-        """
-        Проверяет, что длина наименования товара не больше 10 симвовов. 
-        В противном случае, 
-        обрезать строку (оставить первые 10 символов)
-        """
 
     @property
     def name(self):
@@ -48,6 +43,11 @@ class Item:
 
     @name.setter
     def name(self, value):
+        """
+        Проверяет, что длина наименования товара не больше 10 симвовов.
+        В противном случае,
+        обрезать строку (оставить первые 10 символов)
+        """
         if len(value) <= 10:
             self.__name = value
             print(f'Корректное название - {value}')
@@ -57,6 +57,10 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls, path):
+        """
+        Класс-метод, инициализирующий экземпляры класса `Item`
+        данными из файла _src/items.csv_
+        """
         cls.all.clear()
         path = os.path.join(os.path.dirname(__file__), 'items.csv')
         with open(path, 'r', newline='\n', encoding='UTF-8') as f:
@@ -66,10 +70,16 @@ class Item:
                 print(cls(name=item.get('name'),
                           price=item.get('price'),
                           quantity=item.get('quantity')))
-        """
-        Статический метод, возвращающий число из числа-строки
-        """
 
     @staticmethod
     def string_to_number(name):
+        """
+        Статический метод, возвращающий число из числа-строки
+        """
         return int(float(name))
+
+    def __repr__(self) -> str:
+        return f"{self.__class__.__name__}('{self.name}', {self.price}, {self.quantity})"
+
+    def __str__(self) -> str:
+        return f'{self.name}'
