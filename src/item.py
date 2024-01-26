@@ -83,3 +83,12 @@ class Item:
 
     def __str__(self) -> str:
         return f'{self.name}'
+
+    def __add__(self, other):
+        """
+        Реализация возможности сложения экземпляров класса `Phone` и `Item`
+        (сложение по количеству товара в магазине)
+        """
+        if isinstance(other, Item):
+            return self.quantity + other.quantity
+        return ValueError("Складывать можно только объекты классов с родительским классом Item")
