@@ -27,7 +27,7 @@ def test_str():
 
 @pytest.fixture
 def testing_data():
-    testing_data = 1 or 2
+    phone = Phone("iPhone 14", 120_000, 5, 2)
     return testing_data
 
 
