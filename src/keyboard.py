@@ -11,15 +11,14 @@ class LanguageMixin:
     def language(self):
         return self.__language
 
-    @language.setter
-    def language(self, new_language):
-        self.__language = new_language
-
     def change_lang(self):
+        """
+        Меняет атрибут клавиатуры language (раскладку клавиатуры).
+        """
         if self.language == 'EN':
-            self.language = 'RU'
+            self.__language = 'RU'
         else:
-            self.language = 'EN'
+            self.__language = 'EN'
 
 
 class Keyboard(Item, LanguageMixin):
@@ -33,5 +32,3 @@ class Keyboard(Item, LanguageMixin):
         """
         super().__init__(name, price, quantity)
         LanguageMixin.__init__(self)
-
-
