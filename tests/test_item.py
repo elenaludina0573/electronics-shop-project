@@ -67,6 +67,16 @@ def test_add():
     assert phone1 + phone1 == 10
 
 
+def test_instantiate_from_csv_not():
+    with pytest.raises(FileNotFoundError):
+        Item.instantiate_from_csv()
+
+
+def test_instantiate_from_csv_error():
+    with pytest.raises(InstantiateCSVError):
+        Item.instantiate_from_csv()
+
+
 
 
 
