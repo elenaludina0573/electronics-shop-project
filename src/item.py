@@ -55,20 +55,36 @@ class Item:
             self.__name = value[:10]
             print(f'Длинное слово - {value[:10]}')
 
+
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.massage = "Файл item.csv поврежден"
+
+
+class FileNotFoundError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.massage = "Отсутствует файл item.csv"
+
     @classmethod
     def instantiate_from_csv(cls, path):
         """
         Класс-метод, инициализирующий экземпляры класса `Item`
         данными из файла _src/items.csv_
         """
-        cls.all.clear()
+        if not os.path.dirname(__file__)(path):
+            raise FileNotFoundError
+        else:
+            cls.all.clear()
         path = os.path.join(os.path.dirname(__file__), 'items.csv')
         with open(path, 'r', newline='\n', encoding='UTF-8') as f:
             reader = csv.DictReader(f)
             items = list(reader)
-            for item in items:
+        for item in items:
+            if item['name'] not in items or item['price'] not in items or item['quantity'] not in items:
+                raise InstantiateCSVError
+            else:
                 print(cls(name=item.get('name'),
-                          price=item.get('price'),
+                          rice=item.get('price'),
                           quantity=item.get('quantity')))
 
     @staticmethod
