@@ -2,6 +2,16 @@ import csv
 import os
 
 
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.massage = "Файл item.csv поврежден"
+
+
+class FileNotFoundError(Exception):
+    def __init__(self, *args, **kwargs):
+        self.massage = "Отсутствует файл item.csv"
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -55,16 +65,6 @@ class Item:
             self.__name = value[:10]
             print(f'Длинное слово - {value[:10]}')
 
-
-class InstantiateCSVError(Exception):
-    def __init__(self, *args, **kwargs):
-        self.massage = "Файл item.csv поврежден"
-
-
-class FileNotFoundError(Exception):
-    def __init__(self, *args, **kwargs):
-        self.massage = "Отсутствует файл item.csv"
-
     @classmethod
     def instantiate_from_csv(cls, path):
         """
@@ -84,7 +84,7 @@ class FileNotFoundError(Exception):
                 raise InstantiateCSVError
             else:
                 print(cls(name=item.get('name'),
-                          rice=item.get('price'),
+                          price=item.get('price'),
                           quantity=item.get('quantity')))
 
     @staticmethod
