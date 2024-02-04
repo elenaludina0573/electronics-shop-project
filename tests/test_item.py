@@ -1,5 +1,7 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 import pytest
+import os
+from src.item import InstantiateCSVError
 from src.item import Item
 from src.phone import Phone
 
@@ -60,6 +62,7 @@ def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
 
+
 def test_add():
     item1 = Item("Смартфон", 10000, 20)
     phone1 = Phone("iPhone 14", 120000, 5, 2)
@@ -67,7 +70,7 @@ def test_add():
     assert phone1 + phone1 == 10
 
 
-def test_instantiate_from_csv_not():
+def test_insvantiate_from_csv_not():
     with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv()
 
