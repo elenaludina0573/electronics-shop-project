@@ -72,7 +72,7 @@ class Item:
         данными из файла _src/items.csv_
         """
         if not os.path.join(os.path.dirname(__file__), 'items.csv'):
-            raise FileNotFoundError
+            raise FileNotFoundError("Отсутствует файл item.csv")
         else:
             cls.all.clear()
         path = os.path.join(os.path.dirname(__file__), 'items.csv')
@@ -81,7 +81,7 @@ class Item:
             items = list(reader)
         for item in items:
             if item['name'] not in items or item['price'] not in items or item['quantity'] not in items:
-                raise InstantiateCSVError
+                raise InstantiateCSVError("Файл item.csv поврежден")
             else:
                 print(cls(name=item.get('name'),
                           price=item.get('price'),
