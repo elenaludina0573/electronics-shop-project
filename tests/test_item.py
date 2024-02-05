@@ -41,7 +41,7 @@ def test_name_setter_truncate():
 
 
 def test_instantiate_from_csv():
-    Item.instantiate_from_csv('src/items.csv')  # создание объектов из данных файла
+    Item.instantiate_from_csv()  # создание объектов из данных файла
     assert len(Item.all) == 5  # в файле 5 записей с данными по товарам
 
     item1 = Item.all[0]
@@ -58,6 +58,7 @@ def test_repr():
     item1 = Item("Смартфон", 10000, 20)
     assert repr(item1) == "Item('Смартфон', 10000, 20)"
 
+
 def test_str():
     item1 = Item("Смартфон", 10000, 20)
     assert str(item1) == 'Смартфон'
@@ -70,7 +71,7 @@ def test_add():
     assert phone1 + phone1 == 10
 
 
-def test_insvantiate_from_csv_not():
+def test_instantiate_from_csv_not():
     with pytest.raises(FileNotFoundError):
         Item.instantiate_from_csv()
 
@@ -78,9 +79,3 @@ def test_insvantiate_from_csv_not():
 def test_instantiate_from_csv_error():
     with pytest.raises(InstantiateCSVError):
         Item.instantiate_from_csv()
-
-
-
-
-
-
